@@ -27,7 +27,8 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_left_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/tv_timer"
         tools:text="4" />
 
     <TextView
@@ -36,7 +37,7 @@
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:background="@color/teal_700"
-        app:layout_constraintBottom_toTopOf="@+id/answers_progress"
+        app:layout_constraintBottom_toTopOf="@+id/tv_answers_progress"
         app:layout_constraintEnd_toStartOf="@+id/tv_question"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +58,7 @@
         tools:text="@string/question_mark" />
 
     <TextView
-        android:id="@+id/answers_progress"
+        android:id="@+id/tv_answers_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/progress_answers"
@@ -77,7 +78,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_option_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answers_progress" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_answers_progress" />
 
     <TextView
         android:id="@+id/tv_option_1"
