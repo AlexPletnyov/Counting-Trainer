@@ -4,9 +4,9 @@ import com.alexpletnyov.counting_trainer.domain.entity.GameSettings
 import com.alexpletnyov.counting_trainer.domain.entity.Level
 import com.alexpletnyov.counting_trainer.domain.entity.Question
 import com.alexpletnyov.counting_trainer.domain.repository.GameRepository
+import kotlin.random.Random
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.random.Random
 
 object GameRepositoryImpl : GameRepository {
 
@@ -15,7 +15,7 @@ object GameRepositoryImpl : GameRepository {
 
 	override fun generateQuestion(maxSumValue: Int, countOfOptions: Int): Question {
 		val sum = Random.nextInt(MIN_SUM_VALUE, maxSumValue + 1)
-		val visibleNumber = Random.nextInt(MIN_SUM_VALUE, sum)
+		val visibleNumber = Random.nextInt(MIN_ANSWER_VALUE, sum)
 		val rightAnswer = sum - visibleNumber
 		val options = HashSet<Int>()
 		options.add(rightAnswer)
