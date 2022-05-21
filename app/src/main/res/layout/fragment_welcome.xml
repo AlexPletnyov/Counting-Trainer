@@ -20,11 +20,11 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_margin="32dp"
+            android:src="@drawable/ic_brain"
             android:contentDescription="@string/application_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_title"
