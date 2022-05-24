@@ -14,8 +14,6 @@ import androidx.navigation.fragment.navArgs
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentGameBinding
 import com.alexpletnyov.counting_trainer.domain.entity.GameResult
-import com.alexpletnyov.counting_trainer.domain.entity.GameSettings
-import com.alexpletnyov.counting_trainer.domain.entity.Level
 
 class GameFragment : Fragment() {
 

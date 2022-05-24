@@ -58,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_left_number"
         app:layout_constraintTop_toTopOf="@+id/tv_left_number"
-        tools:text="@string/question_mark" />
+        android:text="@string/question_mark" />
 
     <TextView
         style="@style/BaseTextStyle"
@@ -86,7 +86,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_answers_progress"
         tools:progress="30"
-        tools:secondaryProgress="70" />
+        tools:secondaryProgress="70"
+        tools:progressTint="@color/pink" />
 
     <TextView
         android:id="@+id/tv_option_1"
