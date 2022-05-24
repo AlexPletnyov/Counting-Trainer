@@ -98,9 +98,9 @@ class GameFragment : Fragment() {
 
 	private fun getColorByState(goodState: Boolean): Int {
 		val colorId = if (goodState) {
-			android.R.color.holo_green_light
+			R.color.green
 		} else {
-			android.R.color.holo_red_light
+			R.color.pink
 		}
 		return ContextCompat.getColor(requireContext(), colorId)
 	}

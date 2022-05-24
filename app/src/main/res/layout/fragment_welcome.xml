@@ -27,20 +27,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            style="@style/BaseTextStyle"
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/welcome_title"
-            android:textSize="24sp"
             app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
         <TextView
+            style="@style/BaseTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/welcome_description"
-            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <Button
@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:text="@string/button_understand"
+            android:backgroundTint="@color/blue"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
