@@ -1,21 +1,21 @@
 <resources>
     <string name="app_name">Counting-Trainer</string>
-    <string name="welcome_title">Счётный тренер</string>
-    <string name="welcome_description">Правила игры: число в верхней фигуре является суммой двух чисел снизу. Ваша задача вставить недостающее слогаемое.</string>
+    <string name="welcome_title">Тренер счёта</string>
+    <string name="welcome_description">Правила: Число в вкружке это сумма двух чисел снизу.\nВаша задача вставить недостающее слогаемое.</string>
     <string name="button_understand">Понятно</string>
     <string name="application_logo">Application logo</string>
-    <string name="choose_level">Выберите уровень:</string>
+    <string name="choose_level">Выберите уровень</string>
     <string name="test">Тестовый</string>
     <string name="easy">Лёгкий</string>
     <string name="normal">Средний</string>
     <string name="hard">Тяжёлый</string>
     <string name="clear_timer">00:00</string>
     <string name="question_mark">\?</string>
-    <string name="progress_answers">Правильных ответов %s (минимум %s)</string>
-    <string name="required_answers">Необходимое количество правильных ответов: %s</string>
+    <string name="progress_answers">Правильных ответов: %s\n(минимум: %s)</string>
+    <string name="required_answers">Необходимо правильных ответов: %s</string>
     <string name="score_answers">Ваш счёт: %s</string>
-    <string name="required_percentage">Необходимый процент правильных ответов: %s</string>
-    <string name="score_percentage">Процент правильных ответов: %s</string>
+    <string name="required_percentage">Необходимый процент правильных\nответов: %s%%</string>
+    <string name="score_percentage">Ваш процент: %s%%</string>
     <string name="retry">Попробовать снова</string>
     <string name="game_over">Game over</string>
 </resources>

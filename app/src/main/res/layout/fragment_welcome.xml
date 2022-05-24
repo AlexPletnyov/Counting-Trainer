@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:padding="10dp"
     tools:context=".presentation.WelcomeFragment">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,23 +16,25 @@
 
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_margin="32dp"
-            android:src="@drawable/ic_brain"
             android:contentDescription="@string/application_logo"
+            android:src="@drawable/ic_brain"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            style="@style/BaseTextStyle"
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:gravity="center"
             android:text="@string/welcome_title"
+            android:textColor="@color/blue"
+            android:textSize="30sp"
             app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
         <TextView
@@ -45,11 +47,11 @@
 
         <Button
             android:id="@+id/button_understand"
+            style="@style/BaseButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:text="@string/button_understand"
-            android:backgroundTint="@color/blue"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
