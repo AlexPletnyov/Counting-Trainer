@@ -4,7 +4,7 @@
     <string name="welcome_description">Правила игры: число в верхней фигуре является суммой двух чисел снизу. Ваша задача вставить недостающее слогаемое.</string>
     <string name="button_understand">Понятно</string>
     <string name="application_logo">Application logo</string>
-    <string name="choose_level">Выберите уровень:</string>
+    <string name="choose_level">Выберите уровень</string>
     <string name="test">Тестовый</string>
     <string name="easy">Лёгкий</string>
     <string name="normal">Средний</string>
@@ -12,10 +12,10 @@
     <string name="clear_timer">00:00</string>
     <string name="question_mark">\?</string>
     <string name="progress_answers">Правильных ответов %s (минимум %s)</string>
-    <string name="required_answers">Необходимое количество правильных ответов: %s</string>
-    <string name="score_answers">Ваш счёт: %s</string>
-    <string name="required_percentage">Необходимый процент правильных ответов: %s</string>
-    <string name="score_percentage">Процент правильных ответов: %s</string>
+    <string name="required_answers">Необходимое количество правильных ответов %s</string>
+    <string name="score_answers">Ваш счёт %s</string>
+    <string name="required_percentage">Необходимый процент правильных ответов %s</string>
+    <string name="score_percentage">Процент правильных ответов %s</string>
     <string name="retry">Попробовать снова</string>
     <string name="game_over">Game over</string>
 </resources>

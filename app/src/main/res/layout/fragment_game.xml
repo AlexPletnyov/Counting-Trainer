@@ -53,41 +53,41 @@
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blue"
+        android:text="@string/question_mark"
         app:layout_constraintBottom_toBottomOf="@+id/tv_left_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_left_number"
-        app:layout_constraintTop_toTopOf="@+id/tv_left_number"
-        android:text="@string/question_mark" />
+        app:layout_constraintTop_toTopOf="@+id/tv_left_number" />
 
     <TextView
-        style="@style/BaseTextStyle"
         android:id="@+id/tv_answers_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/progress_answers"
         android:layout_margin="16dp"
-        tools:textColor="@color/green"
+        android:text="@string/progress_answers"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_left_number" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_left_number"
+        tools:textColor="@color/green" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         style="@style/CustomProgressBar"
-        android:layout_margin="5dp"
-        android:theme="@style/CustomProgressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:max="100"
+        android:theme="@style/CustomProgressBar"
         app:layout_constraintBottom_toTopOf="@+id/tv_option_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_answers_progress"
         tools:progress="30"
-        tools:secondaryProgress="70"
-        tools:progressTint="@color/pink" />
+        tools:progressTint="@color/pink"
+        tools:secondaryProgress="70" />
 
     <TextView
         android:id="@+id/tv_option_1"
