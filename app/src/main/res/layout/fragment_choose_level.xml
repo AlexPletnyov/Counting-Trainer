@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".presentation.ChooseLevelFragment">
 
     <TextView
@@ -11,19 +12,17 @@
         style="@style/BaseTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/choose_level"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="16sp"
         android:gravity="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:text="@string/choose_level"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/button_level_test"
         style="@style/BaseButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/green"
         android:text="@string/test" />
 
@@ -32,8 +31,6 @@
         style="@style/BaseButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/easy" />
 
     <Button
@@ -41,8 +38,6 @@
         style="@style/BaseButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/normal" />
 
     <Button
@@ -50,8 +45,6 @@
         style="@style/BaseButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/hard" />
 
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:id="@+id/welcomeFragment"
         android:name="com.alexpletnyov.counting_trainer.presentation.WelcomeFragment"
         android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" >
+        tools:layout="@layout/fragment_welcome">
         <action
             android:id="@+id/action_welcomeFragment_to_chooseLevelFragment"
             app:destination="@id/chooseLevelFragment"
@@ -22,7 +22,7 @@
         android:id="@+id/chooseLevelFragment"
         android:name="com.alexpletnyov.counting_trainer.presentation.ChooseLevelFragment"
         android:label="fragment_choose_level"
-        tools:layout="@layout/fragment_choose_level" >
+        tools:layout="@layout/fragment_choose_level">
         <action
             android:id="@+id/action_chooseLevelFragment_to_gameFragment"
             app:destination="@id/gameFragment"
@@ -35,12 +35,12 @@
         android:id="@+id/gameFragment"
         android:name="com.alexpletnyov.counting_trainer.presentation.GameFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_game" >
+        tools:layout="@layout/fragment_game">
         <action
             android:id="@+id/action_gameFragment_to_gameFinishedFragment"
             app:destination="@id/gameFinishedFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
+            app:enterAnim="@anim/push_left_in"
+            app:exitAnim="@anim/push_left_out"
             app:popEnterAnim="@anim/push_right_in"
             app:popExitAnim="@anim/push_right_out"
             app:popUpTo="@id/gameFragment"
@@ -53,7 +53,7 @@
         android:id="@+id/gameFinishedFragment"
         android:name="com.alexpletnyov.counting_trainer.presentation.GameFinishedFragment"
         android:label="fragment_game_finished"
-        tools:layout="@layout/fragment_game_finished" >
+        tools:layout="@layout/fragment_game_finished">
         <argument
             android:name="gameResult"
             app:argType="com.alexpletnyov.counting_trainer.domain.entity.GameResult" />
