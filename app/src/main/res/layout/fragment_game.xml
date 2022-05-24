@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     tools:context=".presentation.GameFragment">
 
     <TextView
         android:id="@+id/tv_timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_margin="8dp"
+        android:background="@drawable/base_background"
+        android:backgroundTint="@color/green"
+        android:gravity="center"
         android:text="@string/clear_timer"
-        android:textColor="@color/purple_700"
-        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +31,6 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_left_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/tv_timer"
         tools:text="4" />
 
@@ -36,7 +39,7 @@
         style="@style/QuestionTextStyle"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
-        android:background="@color/teal_700"
+        android:backgroundTint="@color/yellow"
         app:layout_constraintBottom_toTopOf="@+id/tv_answers_progress"
         app:layout_constraintEnd_toStartOf="@+id/tv_question"
         app:layout_constraintHorizontal_bias="0.5"
@@ -49,7 +52,7 @@
         style="@style/QuestionTextStyle"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
-        android:background="@color/teal_700"
+        android:backgroundTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="@+id/tv_left_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -58,11 +61,13 @@
         tools:text="@string/question_mark" />
 
     <TextView
+        style="@style/BaseTextStyle"
         android:id="@+id/tv_answers_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/progress_answers"
         android:layout_margin="16dp"
+        tools:textColor="@color/green"
         app:layout_constraintBottom_toTopOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,22 +75,24 @@
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="411dp"
+        style="@style/CustomProgressBar"
+        android:layout_margin="5dp"
+        android:theme="@style/CustomProgressBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="100"
-        android:secondaryProgressTint="@android:color/background_dark"
         app:layout_constraintBottom_toTopOf="@+id/tv_option_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_answers_progress" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_answers_progress"
+        tools:progress="30"
+        tools:secondaryProgress="70" />
 
     <TextView
         android:id="@+id/tv_option_1"
         style="@style/OptionTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_red_light"
         app:layout_constraintBottom_toTopOf="@+id/tv_option_4"
         app:layout_constraintEnd_toStartOf="@+id/tv_option_2"
         app:layout_constraintHorizontal_bias="0.5"
@@ -97,7 +104,6 @@
         style="@style/OptionTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_light"
         app:layout_constraintBottom_toTopOf="@+id/tv_option_5"
         app:layout_constraintEnd_toStartOf="@+id/tv_option_3"
         app:layout_constraintHorizontal_bias="0.5"
@@ -110,7 +116,6 @@
         style="@style/OptionTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_green_light"
         app:layout_constraintBottom_toTopOf="@+id/tv_option_6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -123,7 +128,6 @@
         style="@style/OptionTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_option_5"
         app:layout_constraintHorizontal_bias="0.5"
@@ -136,7 +140,6 @@
         style="@style/OptionTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_purple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_option_6"
         app:layout_constraintHorizontal_bias="0.5"
@@ -149,7 +152,6 @@
         style="@style/OptionTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_bright"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

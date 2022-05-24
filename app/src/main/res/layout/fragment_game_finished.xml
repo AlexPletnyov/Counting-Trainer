@@ -20,12 +20,12 @@
         tools:src="@drawable/ic_win" />
 
     <TextView
+        style="@style/BaseTextStyle"
         android:id="@+id/tv_required_answers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/required_answers"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_score_answers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,22 +33,22 @@
         app:layout_constraintVertical_chainStyle="packed"/>
 
     <TextView
+        style="@style/BaseTextStyle"
         android:id="@+id/tv_score_answers"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/score_answers"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_required_percentage"
         app:layout_constraintEnd_toEndOf="@+id/tv_required_answers"
         app:layout_constraintStart_toStartOf="@+id/tv_required_answers"
         app:layout_constraintTop_toBottomOf="@+id/tv_required_answers"/>
 
     <TextView
+        style="@style/BaseTextStyle"
         android:id="@+id/tv_required_percentage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/required_percentage"
-        android:textSize="18sp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@id/tv_score_percentage"
         app:layout_constraintEnd_toEndOf="@+id/tv_required_answers"
@@ -57,11 +57,11 @@
         app:layout_constraintVertical_chainStyle="packed"/>
 
     <TextView
+        style="@style/BaseTextStyle"
         android:id="@+id/tv_score_percentage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/score_percentage"
-        android:textSize="18sp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_required_answers"
@@ -74,6 +74,7 @@
         android:layout_height="wrap_content"
         android:text="@string/retry"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/blue"
         tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
