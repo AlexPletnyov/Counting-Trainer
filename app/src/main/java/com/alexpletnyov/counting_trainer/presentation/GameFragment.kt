@@ -92,6 +92,10 @@ class GameFragment : Fragment() {
 		viewModel.formattedTime.observe(viewLifecycleOwner) {
 			binding.tvTimer.text = it
 		}
+		viewModel.timeRunningOut.observe(viewLifecycleOwner) {
+			val color = getColorByState(!it)
+			binding.tvTimer.backgroundTintList = ColorStateList.valueOf(color)
+		}
 	}
 
 	private fun getColorByState(goodState: Boolean): Int {

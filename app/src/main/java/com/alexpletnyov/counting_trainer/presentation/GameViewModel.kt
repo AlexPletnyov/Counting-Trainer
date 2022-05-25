@@ -49,6 +49,10 @@ class GameViewModel(
 	val enoughPercent: LiveData<Boolean>
 		get() = _enoughPercent
 
+	private val _timeRunningOut = MutableLiveData<Boolean>()
+	val timeRunningOut: LiveData<Boolean>
+		get() = _timeRunningOut
+
 	private val _enoughCount = MutableLiveData<Boolean>()
 	val enoughCount: LiveData<Boolean>
 		get() = _enoughCount
@@ -133,6 +137,7 @@ class GameViewModel(
 		) {
 			override fun onTick(millsUntilFinished: Long) {
 				_formattedTime.value = formatTime(millsUntilFinished)
+				_timeRunningOut.value = millsUntilFinished < RUNNING_OUT_TIME
 			}
 
 			override fun onFinish() {
@@ -158,5 +163,6 @@ class GameViewModel(
 
 		private const val MILLIS_IN_SECOND = 1000L
 		private const val SECONDS_IN_MINUTE = 60
+		private const val RUNNING_OUT_TIME = 10_000
 	}
 }
