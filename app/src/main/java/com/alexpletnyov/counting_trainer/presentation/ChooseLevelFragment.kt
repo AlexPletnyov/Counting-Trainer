@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentChooseLevelBinding
@@ -15,6 +16,8 @@ class ChooseLevelFragment : Fragment() {
 	private var _binding: FragmentChooseLevelBinding? = null
 	private val binding: FragmentChooseLevelBinding
 		get() = _binding ?: throw RuntimeException("FragmentChooseLevelBinding == null")
+
+	private val viewModelData: DataViewModel by activityViewModels()
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +46,8 @@ class ChooseLevelFragment : Fragment() {
 	}
 
 	private fun launchGameFragment(level: Level) {
-		findNavController().navigate(
-			ChooseLevelFragmentDirections.actionChooseLevelFragmentToGameFragment(level)
-		)
+		viewModelData.setLevel(level)
+		findNavController().navigate(R.id.action_chooseLevelFragment_to_gameFragment)
 	}
 
 	override fun onDestroyView() {
