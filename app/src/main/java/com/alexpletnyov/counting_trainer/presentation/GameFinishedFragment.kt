@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentGameFinishedBinding
@@ -16,7 +15,9 @@ import com.alexpletnyov.counting_trainer.domain.entity.GameResult
 class GameFinishedFragment : Fragment() {
 
 	private lateinit var gameResult: GameResult
-	private val viewModelData: DataViewModel by activityViewModels()
+	private val viewModel by activityViewModels<GameViewModel>{
+		(requireActivity() as MainActivity).factory!!
+	}
 
 	private var _binding: FragmentGameFinishedBinding? = null
 	private val binding: FragmentGameFinishedBinding
@@ -86,7 +87,7 @@ class GameFinishedFragment : Fragment() {
 	}
 
 	private fun getArgs() {
-		viewModelData.gameResult.observe(activity as LifecycleOwner) {
+		viewModel.gameResult.observe(activity as LifecycleOwner) {
 			gameResult = it
 		}
 	}

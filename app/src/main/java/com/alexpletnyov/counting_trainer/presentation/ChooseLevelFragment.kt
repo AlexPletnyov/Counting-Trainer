@@ -1,6 +1,8 @@
 package com.alexpletnyov.counting_trainer.presentation
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +19,9 @@ class ChooseLevelFragment : Fragment() {
 	private val binding: FragmentChooseLevelBinding
 		get() = _binding ?: throw RuntimeException("FragmentChooseLevelBinding == null")
 
-	private val viewModelData: DataViewModel by activityViewModels()
+	private val viewModel by activityViewModels<GameViewModel>{
+		(requireActivity() as MainActivity).factory!!
+	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +50,7 @@ class ChooseLevelFragment : Fragment() {
 	}
 
 	private fun launchGameFragment(level: Level) {
-		viewModelData.setLevel(level)
+		viewModel.setLevel(level)
 		findNavController().navigate(R.id.action_chooseLevelFragment_to_gameFragment)
 	}
 

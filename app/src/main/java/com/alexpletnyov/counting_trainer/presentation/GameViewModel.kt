@@ -2,12 +2,10 @@ package com.alexpletnyov.counting_trainer.presentation
 
 import android.app.Application
 import android.os.CountDownTimer
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.alexpletnyov.counting_trainer.R
-import com.alexpletnyov.counting_trainer.data.GameRepositoryImpl
 import com.alexpletnyov.counting_trainer.domain.entity.GameResult
 import com.alexpletnyov.counting_trainer.domain.entity.GameSettings
 import com.alexpletnyov.counting_trainer.domain.entity.Level
@@ -16,18 +14,18 @@ import com.alexpletnyov.counting_trainer.domain.usecases.GenerateQuestionUseCase
 import com.alexpletnyov.counting_trainer.domain.usecases.GetGameSettingsUseCase
 
 class GameViewModel(
-	private val level: Level,
+	private val getGameSettingsUseCase: GetGameSettingsUseCase,
+	private val generateQuestionUseCase: GenerateQuestionUseCase,
 	private val application: Application
 ) : ViewModel() {
 
 	private lateinit var gameSettings: GameSettings
 
-	private val repository = GameRepositoryImpl
-
-	private val getGameSettingsUseCase = GetGameSettingsUseCase(repository)
-	private val generateQuestionUseCase = GenerateQuestionUseCase(repository)
-
 	private var timer: CountDownTimer? = null
+
+	private val _level = MutableLiveData<Level>()
+	val level: LiveData<Level>
+		get() = _level
 
 	private val _formattedTime = MutableLiveData<String>()
 	val formattedTime: LiveData<String>
@@ -68,12 +66,8 @@ class GameViewModel(
 	private var countOfRightAnswers = 0
 	private var countOfQuestions = 0
 
-	init {
-		startGame()
-	}
-
-	private fun startGame() {
-		getGameSettings()
+	fun startGame(level: Level) {
+		getGameSettings(level)
 		startTimer()
 		generateQuestion()
 		updateProgress()
@@ -125,7 +119,7 @@ class GameViewModel(
 		_question.value = generateQuestionUseCase(gameSettings.maxSumValue)
 	}
 
-	private fun getGameSettings() {
+	private fun getGameSettings(level: Level) {
 		gameSettings = getGameSettingsUseCase(level)
 		_minPercent.value = gameSettings.minPercentOfRightAnswers
 	}
@@ -154,6 +148,11 @@ class GameViewModel(
 		return String.format("%02d:%02d", minutes, leftSeconds)
 	}
 
+	fun setLevel(level: Level) {
+		_level.value = level
+	}
+
+	//TODO Move timer cancellation to another method
 	override fun onCleared() {
 		super.onCleared()
 		timer?.cancel()

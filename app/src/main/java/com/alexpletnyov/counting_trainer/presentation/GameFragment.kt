@@ -2,6 +2,7 @@ package com.alexpletnyov.counting_trainer.presentation
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,24 +11,23 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentGameBinding
 import com.alexpletnyov.counting_trainer.domain.entity.GameResult
 import com.alexpletnyov.counting_trainer.domain.entity.Level
+import com.alexpletnyov.counting_trainer.domain.entity.Question
 
 class GameFragment : Fragment() {
 
 	private lateinit var level: Level
 
-	private val viewModelFactory by lazy {
-		GameViewModelFactory(level, requireActivity().application)
+	private val viewModel by activityViewModels<GameViewModel>{
+		(requireActivity() as MainActivity).factory!!
 	}
-	private val viewModel by lazy {
-		ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
-	}
-	private val viewModelData: DataViewModel by activityViewModels()
 
 	private val tvOptions by lazy {
 		mutableListOf<TextView>().apply {
@@ -47,6 +47,7 @@ class GameFragment : Fragment() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		getArgs()
+		viewModel.startGame(level)
 	}
 
 	override fun onCreateView(
@@ -92,8 +93,9 @@ class GameFragment : Fragment() {
 		viewModel.minPercent.observe(viewLifecycleOwner) {
 			binding.progressBar.secondaryProgress = it
 		}
+		//TODO clear gameResult?
 		viewModel.gameResult.observe(viewLifecycleOwner) {
-			launchGameFinishedFragment(it)
+			launchGameFinishedFragment()
 		}
 		viewModel.progressAnswers.observe(viewLifecycleOwner) {
 			binding.tvAnswersProgress.text = it
@@ -116,13 +118,12 @@ class GameFragment : Fragment() {
 		return ContextCompat.getColor(requireContext(), colorId)
 	}
 
-	private fun launchGameFinishedFragment(gameResult: GameResult) {
-		viewModelData.setGameResult(gameResult)
+	private fun launchGameFinishedFragment() {
 		findNavController().navigate(R.id.action_gameFragment_to_gameFinishedFragment)
 	}
 
 	private fun getArgs() {
-		viewModelData.level.observe(activity as LifecycleOwner) {
+		viewModel.level.observe(activity as LifecycleOwner) {
 			level = it
 		}
 	}
