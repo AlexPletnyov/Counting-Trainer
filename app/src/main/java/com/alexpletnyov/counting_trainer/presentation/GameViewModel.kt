@@ -2,6 +2,7 @@ package com.alexpletnyov.counting_trainer.presentation
 
 import android.app.Application
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,51 +24,37 @@ class GameViewModel(
 
 	private var timer: CountDownTimer? = null
 
-	private val _level = MutableLiveData<Level>()
-	val level: LiveData<Level>
-		get() = _level
-
 	private val _formattedTime = MutableLiveData<String>()
-	val formattedTime: LiveData<String>
-		get() = _formattedTime
+	val formattedTime: LiveData<String> = _formattedTime
 
 	private val _question = MutableLiveData<Question>()
-	val question: LiveData<Question>
-		get() = _question
+	val question: LiveData<Question> = _question
 
 	private val _percentOfRightAnswers = MutableLiveData<Int>()
-	val percentOfRightAnswers: LiveData<Int>
-		get() = _percentOfRightAnswers
+	val percentOfRightAnswers: LiveData<Int> = _percentOfRightAnswers
 
 	private val _progressAnswers = MutableLiveData<String>()
-	val progressAnswers: LiveData<String>
-		get() = _progressAnswers
+	val progressAnswers: LiveData<String> = _progressAnswers
 
 	private val _enoughPercent = MutableLiveData<Boolean>()
-	val enoughPercent: LiveData<Boolean>
-		get() = _enoughPercent
+	val enoughPercent: LiveData<Boolean> = _enoughPercent
 
 	private val _timeRunningOut = MutableLiveData<Boolean>()
-	val timeRunningOut: LiveData<Boolean>
-		get() = _timeRunningOut
+	val timeRunningOut: LiveData<Boolean> = _timeRunningOut
 
 	private val _enoughCount = MutableLiveData<Boolean>()
-	val enoughCount: LiveData<Boolean>
-		get() = _enoughCount
+	val enoughCount: LiveData<Boolean> = _enoughCount
 
 	private val _minPercent = MutableLiveData<Int>()
-	val minPercent: LiveData<Int>
-		get() = _minPercent
+	val minPercent: LiveData<Int> = _minPercent
 
 	private val _gameResult = MutableLiveData<GameResult>()
-	val gameResult: LiveData<GameResult>
-		get() = _gameResult
+	val gameResult: LiveData<GameResult> = _gameResult
 
 	private var countOfRightAnswers = 0
 	private var countOfQuestions = 0
 
-	fun startGame(level: Level) {
-		getGameSettings(level)
+	fun startGame() {
 		startTimer()
 		generateQuestion()
 		updateProgress()
@@ -107,9 +94,9 @@ class GameViewModel(
 		return ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
 	}
 
-	private fun checkAnswer(number: Int) {
-		val rightAnswer = question.value?.rightAnswer
-		if (number == rightAnswer) {
+	private fun checkAnswer(buttonIndex: Int) {
+		val rightAnswerPos = question.value?.rightAnswerPos
+		if (buttonIndex == rightAnswerPos) {
 			countOfRightAnswers++
 		}
 		countOfQuestions++
@@ -119,7 +106,7 @@ class GameViewModel(
 		_question.value = generateQuestionUseCase(gameSettings.maxSumValue)
 	}
 
-	private fun getGameSettings(level: Level) {
+	fun getGameSettings(level: Level) {
 		gameSettings = getGameSettingsUseCase(level)
 		_minPercent.value = gameSettings.minPercentOfRightAnswers
 	}
@@ -148,13 +135,7 @@ class GameViewModel(
 		return String.format("%02d:%02d", minutes, leftSeconds)
 	}
 
-	fun setLevel(level: Level) {
-		_level.value = level
-	}
-
-	//TODO Move timer cancellation to another method
-	override fun onCleared() {
-		super.onCleared()
+	fun cancelTimer() {
 		timer?.cancel()
 	}
 

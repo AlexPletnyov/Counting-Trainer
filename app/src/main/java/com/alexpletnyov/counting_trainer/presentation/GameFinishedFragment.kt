@@ -15,7 +15,7 @@ import com.alexpletnyov.counting_trainer.domain.entity.GameResult
 class GameFinishedFragment : Fragment() {
 
 	private lateinit var gameResult: GameResult
-	private val viewModel by activityViewModels<GameViewModel>{
+	private val viewModel by activityViewModels<GameViewModel> {
 		(requireActivity() as MainActivity).factory!!
 	}
 

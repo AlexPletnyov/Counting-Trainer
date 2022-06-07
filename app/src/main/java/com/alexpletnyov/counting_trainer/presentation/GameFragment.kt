@@ -2,41 +2,32 @@ package com.alexpletnyov.counting_trainer.presentation
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentGameBinding
-import com.alexpletnyov.counting_trainer.domain.entity.GameResult
-import com.alexpletnyov.counting_trainer.domain.entity.Level
-import com.alexpletnyov.counting_trainer.domain.entity.Question
 
 class GameFragment : Fragment() {
 
-	private lateinit var level: Level
-
-	private val viewModel by activityViewModels<GameViewModel>{
+	private val viewModel by activityViewModels<GameViewModel> {
 		(requireActivity() as MainActivity).factory!!
 	}
 
 	private val tvOptions by lazy {
-		mutableListOf<TextView>().apply {
-			add(binding.tvOption1)
-			add(binding.tvOption2)
-			add(binding.tvOption3)
-			add(binding.tvOption4)
-			add(binding.tvOption5)
-			add(binding.tvOption6)
+		with(binding) {
+			listOf(
+				tvOption1,
+				tvOption2,
+				tvOption3,
+				tvOption4,
+				tvOption5,
+				tvOption6
+			)
 		}
 	}
 
@@ -46,8 +37,7 @@ class GameFragment : Fragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		getArgs()
-		viewModel.startGame(level)
+		viewModel.startGame()
 	}
 
 	override fun onCreateView(
@@ -65,9 +55,9 @@ class GameFragment : Fragment() {
 	}
 
 	private fun setClickListenersToOptions() {
-		for (tvOption in tvOptions) {
-			tvOption.setOnClickListener {
-				viewModel.chooseAnswer(tvOption.text.toString().toInt())
+		tvOptions.forEachIndexed { index, item ->
+			item.setOnClickListener {
+				viewModel.chooseAnswer(index)
 			}
 		}
 	}
@@ -76,7 +66,7 @@ class GameFragment : Fragment() {
 		viewModel.question.observe(viewLifecycleOwner) {
 			binding.tvSum.text = it.sum.toString()
 			binding.tvLeftNumber.text = it.visibleNumber.toString()
-			for (i in 0 until tvOptions.size) {
+			for (i in tvOptions.indices) {
 				tvOptions[i].text = it.options[i].toString()
 			}
 		}
@@ -120,12 +110,6 @@ class GameFragment : Fragment() {
 
 	private fun launchGameFinishedFragment() {
 		findNavController().navigate(R.id.action_gameFragment_to_gameFinishedFragment)
-	}
-
-	private fun getArgs() {
-		viewModel.level.observe(activity as LifecycleOwner) {
-			level = it
-		}
 	}
 
 	override fun onDestroyView() {

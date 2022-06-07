@@ -16,7 +16,8 @@ class GameViewModelFactory(
 			return GameViewModel(
 				GetGameSettingsUseCase(GameRepositoryImpl),
 				GenerateQuestionUseCase(GameRepositoryImpl),
-				application) as T
+				application
+			) as T
 		}
 		throw RuntimeException("Unknown view model class $modelClass")
 	}
