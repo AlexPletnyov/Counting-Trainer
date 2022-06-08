@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.alexpletnyov.counting_trainer.GameApp
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentChooseLevelBinding
 import com.alexpletnyov.counting_trainer.domain.entity.Level
@@ -18,7 +19,7 @@ class ChooseLevelFragment : Fragment() {
 		get() = _binding ?: throw RuntimeException("FragmentChooseLevelBinding == null")
 
 	private val viewModel by activityViewModels<GameViewModel> {
-		(requireActivity() as MainActivity).factory!!
+		(requireActivity().application as GameApp).factory
 	}
 
 	override fun onCreateView(

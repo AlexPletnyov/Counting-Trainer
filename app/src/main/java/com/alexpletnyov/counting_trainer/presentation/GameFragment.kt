@@ -9,13 +9,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.alexpletnyov.counting_trainer.GameApp
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
 
 	private val viewModel by activityViewModels<GameViewModel> {
-		(requireActivity() as MainActivity).factory!!
+		(requireActivity().application as GameApp).factory
 	}
 
 	private val tvOptions by lazy {
