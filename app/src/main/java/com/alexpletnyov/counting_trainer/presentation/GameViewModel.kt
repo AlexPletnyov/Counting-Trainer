@@ -2,7 +2,6 @@ package com.alexpletnyov.counting_trainer.presentation
 
 import android.app.Application
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,10 +50,14 @@ class GameViewModel(
 	private val _gameResult = MutableLiveData<GameResult>()
 	val gameResult: LiveData<GameResult> = _gameResult
 
+	private val _finished = MutableLiveData<Boolean>()
+	val finished: LiveData<Boolean> = _finished
+
 	private var countOfRightAnswers = 0
 	private var countOfQuestions = 0
 
 	fun startGame() {
+		resetData()
 		startTimer()
 		generateQuestion()
 		updateProgress()
@@ -67,6 +70,7 @@ class GameViewModel(
 			countOfQuestions,
 			gameSettings
 		)
+		_finished.value = true
 	}
 
 	fun chooseAnswer(number: Int) {
@@ -109,6 +113,13 @@ class GameViewModel(
 	fun getGameSettings(level: Level) {
 		gameSettings = getGameSettingsUseCase(level)
 		_minPercent.value = gameSettings.minPercentOfRightAnswers
+	}
+
+	private fun resetData() {
+		_finished.value = false
+		_progressAnswers.value = 0.toString()
+		countOfQuestions = 0
+		countOfRightAnswers = 0
 	}
 
 	private fun startTimer() {

@@ -64,7 +64,6 @@ class GameFragment : Fragment() {
 	}
 
 	private fun observeViewModel() {
-		//TODO observers don't removed
 		with(viewModel) {
 			question.observe(viewLifecycleOwner) {
 				binding.tvSum.text = it.sum.toString()
@@ -86,8 +85,8 @@ class GameFragment : Fragment() {
 			minPercent.observe(viewLifecycleOwner) {
 				binding.progressBar.secondaryProgress = it
 			}
-			gameResult.observe(viewLifecycleOwner) {
-				launchGameFinishedFragment()
+			finished.observe(viewLifecycleOwner) {
+				if (it) launchGameFinishedFragment()
 			}
 			progressAnswers.observe(viewLifecycleOwner) {
 				binding.tvAnswersProgress.text = it
