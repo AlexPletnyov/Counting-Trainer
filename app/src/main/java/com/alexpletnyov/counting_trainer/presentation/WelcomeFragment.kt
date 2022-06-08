@@ -1,15 +1,13 @@
 package com.alexpletnyov.counting_trainer.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.ActivityNavigator
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentWelcomeBinding
-import java.lang.RuntimeException
 
 class WelcomeFragment : Fragment() {
 

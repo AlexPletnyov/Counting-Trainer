@@ -1,7 +1,7 @@
 package com.alexpletnyov.counting_trainer.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.alexpletnyov.counting_trainer.R
 
 class MainActivity : AppCompatActivity() {

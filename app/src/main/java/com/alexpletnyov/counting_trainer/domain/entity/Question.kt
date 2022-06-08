@@ -5,6 +5,6 @@ data class Question(
 	val visibleNumber: Int,
 	val options: List<Int>
 ) {
-	val rightAnswer: Int
-		get() = sum - visibleNumber
+	private val rightAnswer: Int = sum - visibleNumber
+	val rightAnswerPos get() = options.indexOfFirst { it == rightAnswer}
 }

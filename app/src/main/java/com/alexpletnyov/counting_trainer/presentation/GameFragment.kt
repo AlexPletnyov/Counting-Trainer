@@ -5,40 +5,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import com.alexpletnyov.counting_trainer.GameApp
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentGameBinding
-import com.alexpletnyov.counting_trainer.domain.entity.GameResult
 
 class GameFragment : Fragment() {
 
-	private val args by navArgs<GameFragmentArgs>()
-	private val viewModelFactory by lazy {
-		GameViewModelFactory(args.level, requireActivity().application)
-	}
-	private val viewModel by lazy {
-		ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
+	private val viewModel by activityViewModels<GameViewModel> {
+		(requireActivity().application as GameApp).factory
 	}
 
 	private val tvOptions by lazy {
-		mutableListOf<TextView>().apply {
-			add(binding.tvOption1)
-			add(binding.tvOption2)
-			add(binding.tvOption3)
-			add(binding.tvOption4)
-			add(binding.tvOption5)
-			add(binding.tvOption6)
+		with(binding) {
+			listOf(
+				tvOption1,
+				tvOption2,
+				tvOption3,
+				tvOption4,
+				tvOption5,
+				tvOption6
+			)
 		}
 	}
 
 	private var _binding: FragmentGameBinding? = null
 	private val binding: FragmentGameBinding
 		get() = _binding ?: throw RuntimeException("FragmentGameBinding == null")
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		viewModel.startGame()
+	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -55,47 +56,50 @@ class GameFragment : Fragment() {
 	}
 
 	private fun setClickListenersToOptions() {
-		for (tvOption in tvOptions) {
-			tvOption.setOnClickListener {
-				viewModel.chooseAnswer(tvOption.text.toString().toInt())
+		tvOptions.forEachIndexed { index, item ->
+			item.setOnClickListener {
+				viewModel.chooseAnswer(index)
 			}
 		}
 	}
 
 	private fun observeViewModel() {
-		viewModel.question.observe(viewLifecycleOwner) {
-			binding.tvSum.text = it.sum.toString()
-			binding.tvLeftNumber.text = it.visibleNumber.toString()
-			for (i in 0 until tvOptions.size) {
-				tvOptions[i].text = it.options[i].toString()
+		with(viewModel) {
+			question.observe(viewLifecycleOwner) {
+				binding.tvSum.text = it.sum.toString()
+				binding.tvLeftNumber.text = it.visibleNumber.toString()
+				tvOptions.forEachIndexed { index, _ ->
+					tvOptions[index].text = it.options[index].toString()
+				}
+			}
+			percentOfRightAnswers.observe(viewLifecycleOwner) {
+				binding.progressBar.setProgress(it, true)
+			}
+			enoughCount.observe(viewLifecycleOwner) {
+				binding.tvAnswersProgress.setTextColor(getColorByState(it))
+			}
+			enoughPercent.observe(viewLifecycleOwner) {
+				val color = getColorByState(it)
+				binding.progressBar.progressTintList = ColorStateList.valueOf(color)
+			}
+			minPercent.observe(viewLifecycleOwner) {
+				binding.progressBar.secondaryProgress = it
+			}
+			finished.observe(viewLifecycleOwner) {
+				if (it) launchGameFinishedFragment()
+			}
+			progressAnswers.observe(viewLifecycleOwner) {
+				binding.tvAnswersProgress.text = it
+			}
+			formattedTime.observe(viewLifecycleOwner) {
+				binding.tvTimer.text = it
+			}
+			timeRunningOut.observe(viewLifecycleOwner) {
+				val color = getColorByState(!it)
+				binding.tvTimer.backgroundTintList = ColorStateList.valueOf(color)
 			}
 		}
-		viewModel.percentOfRightAnswers.observe(viewLifecycleOwner) {
-			binding.progressBar.setProgress(it, true)
-		}
-		viewModel.enoughCount.observe(viewLifecycleOwner) {
-			binding.tvAnswersProgress.setTextColor(getColorByState(it))
-		}
-		viewModel.enoughPercent.observe(viewLifecycleOwner) {
-			val color = getColorByState(it)
-			binding.progressBar.progressTintList = ColorStateList.valueOf(color)
-		}
-		viewModel.minPercent.observe(viewLifecycleOwner) {
-			binding.progressBar.secondaryProgress = it
-		}
-		viewModel.gameResult.observe(viewLifecycleOwner) {
-			launchGameFinishedFragment(it)
-		}
-		viewModel.progressAnswers.observe(viewLifecycleOwner) {
-			binding.tvAnswersProgress.text = it
-		}
-		viewModel.formattedTime.observe(viewLifecycleOwner) {
-			binding.tvTimer.text = it
-		}
-		viewModel.timeRunningOut.observe(viewLifecycleOwner) {
-			val color = getColorByState(!it)
-			binding.tvTimer.backgroundTintList = ColorStateList.valueOf(color)
-		}
+
 	}
 
 	private fun getColorByState(goodState: Boolean): Int {
@@ -107,10 +111,8 @@ class GameFragment : Fragment() {
 		return ContextCompat.getColor(requireContext(), colorId)
 	}
 
-	private fun launchGameFinishedFragment(gameResult: GameResult) {
-		findNavController().navigate(
-			GameFragmentDirections.actionGameFragmentToGameFinishedFragment(gameResult)
-		)
+	private fun launchGameFinishedFragment() {
+		findNavController().navigate(R.id.action_gameFragment_to_gameFinishedFragment)
 	}
 
 	override fun onDestroyView() {
