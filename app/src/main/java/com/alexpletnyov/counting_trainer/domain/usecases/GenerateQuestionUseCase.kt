@@ -2,8 +2,11 @@ package com.alexpletnyov.counting_trainer.domain.usecases
 
 import com.alexpletnyov.counting_trainer.domain.entity.Question
 import com.alexpletnyov.counting_trainer.domain.repository.GameRepository
+import javax.inject.Inject
 
-class GenerateQuestionUseCase(private val repository: GameRepository) {
+class GenerateQuestionUseCase @Inject constructor(
+	private val repository: GameRepository
+) {
 
 	operator fun invoke(maxSumValue: Int): Question {
 		return repository.generateQuestion(maxSumValue, COUNT_OF_OPTIONS)

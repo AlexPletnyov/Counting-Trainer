@@ -1,6 +1,8 @@
 package com.alexpletnyov.counting_trainer.domain.entity
 
-data class GameResult(
+import javax.inject.Inject
+
+data class GameResult @Inject constructor(
 	val winner: Boolean,
 	val countOfRightAnswers: Int,
 	val countOfQuestions: Int,
