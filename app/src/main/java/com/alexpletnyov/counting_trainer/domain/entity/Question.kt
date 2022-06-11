@@ -1,6 +1,8 @@
 package com.alexpletnyov.counting_trainer.domain.entity
 
-data class Question(
+import javax.inject.Inject
+
+data class Question @Inject constructor(
 	val sum: Int,
 	val visibleNumber: Int,
 	val options: List<Int>

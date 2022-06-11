@@ -1,5 +1,6 @@
 package com.alexpletnyov.counting_trainer.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.alexpletnyov.counting_trainer.GameApp
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentChooseLevelBinding
 import com.alexpletnyov.counting_trainer.domain.entity.Level
+import javax.inject.Inject
 
 class ChooseLevelFragment : Fragment() {
 
@@ -18,8 +19,20 @@ class ChooseLevelFragment : Fragment() {
 	private val binding: FragmentChooseLevelBinding
 		get() = _binding ?: throw RuntimeException("FragmentChooseLevelBinding == null")
 
+	@Inject
+	lateinit var viewModelFactory: ViewModelFactory
+
+	private val component by lazy {
+		(requireActivity().application as GameApplication).component
+	}
+
 	private val viewModel by activityViewModels<GameViewModel> {
-		(requireActivity().application as GameApp).factory
+		viewModelFactory
+	}
+
+	override fun onAttach(context: Context) {
+		super.onAttach(context)
+		component.inject(this)
 	}
 
 	override fun onCreateView(

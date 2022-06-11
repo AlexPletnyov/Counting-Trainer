@@ -4,14 +4,12 @@ import com.alexpletnyov.counting_trainer.domain.entity.GameSettings
 import com.alexpletnyov.counting_trainer.domain.entity.Level
 import com.alexpletnyov.counting_trainer.domain.entity.Question
 import com.alexpletnyov.counting_trainer.domain.repository.GameRepository
+import javax.inject.Inject
 import kotlin.random.Random
 import kotlin.math.max
 import kotlin.math.min
 
-object GameRepositoryImpl : GameRepository {
-
-	private const val MIN_SUM_VALUE = 2
-	private const val MIN_ANSWER_VALUE = 1
+class GameRepositoryImpl @Inject constructor() : GameRepository {
 
 	override fun generateQuestion(maxSumValue: Int, countOfOptions: Int): Question {
 		val sum = Random.nextInt(MIN_SUM_VALUE, maxSumValue + 1)
@@ -28,7 +26,7 @@ object GameRepositoryImpl : GameRepository {
 	}
 
 	override fun getGameSettings(level: Level): GameSettings {
-		return when(level) {
+		return when (level) {
 			Level.TEST -> GameSettings(
 				10,
 				3,
@@ -54,5 +52,10 @@ object GameRepositoryImpl : GameRepository {
 				40
 			)
 		}
+	}
+
+	companion object {
+		private const val MIN_SUM_VALUE = 2
+		private const val MIN_ANSWER_VALUE = 1
 	}
 }

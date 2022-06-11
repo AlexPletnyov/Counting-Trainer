@@ -1,5 +1,6 @@
 package com.alexpletnyov.counting_trainer.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,21 +9,34 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
-import com.alexpletnyov.counting_trainer.GameApp
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentGameFinishedBinding
 import com.alexpletnyov.counting_trainer.domain.entity.GameResult
+import javax.inject.Inject
 
 class GameFinishedFragment : Fragment() {
 
 	private lateinit var gameResult: GameResult
+
+	@Inject
+	lateinit var viewModelFactory: ViewModelFactory
+
+	private val component by lazy {
+		(requireActivity().application as GameApplication).component
+	}
+
 	private val viewModel by activityViewModels<GameViewModel> {
-		(requireActivity().application as GameApp).factory
+		viewModelFactory
 	}
 
 	private var _binding: FragmentGameFinishedBinding? = null
 	private val binding: FragmentGameFinishedBinding
 		get() = _binding ?: throw RuntimeException("FragmentGameFinishedBinding == null")
+
+	override fun onAttach(context: Context) {
+		super.onAttach(context)
+		component.inject(this)
+	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,

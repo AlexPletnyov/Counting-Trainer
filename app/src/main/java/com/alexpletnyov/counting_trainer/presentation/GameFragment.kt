@@ -1,5 +1,6 @@
 package com.alexpletnyov.counting_trainer.presentation
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,14 +10,21 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.alexpletnyov.counting_trainer.GameApp
 import com.alexpletnyov.counting_trainer.R
 import com.alexpletnyov.counting_trainer.databinding.FragmentGameBinding
+import javax.inject.Inject
 
 class GameFragment : Fragment() {
 
+	@Inject
+	lateinit var viewModelFactory: ViewModelFactory
+
+	private val component by lazy {
+		(requireActivity().application as GameApplication).component
+	}
+
 	private val viewModel by activityViewModels<GameViewModel> {
-		(requireActivity().application as GameApp).factory
+		viewModelFactory
 	}
 
 	private val tvOptions by lazy {
@@ -35,6 +43,11 @@ class GameFragment : Fragment() {
 	private var _binding: FragmentGameBinding? = null
 	private val binding: FragmentGameBinding
 		get() = _binding ?: throw RuntimeException("FragmentGameBinding == null")
+
+	override fun onAttach(context: Context) {
+		super.onAttach(context)
+		component.inject(this)
+	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)

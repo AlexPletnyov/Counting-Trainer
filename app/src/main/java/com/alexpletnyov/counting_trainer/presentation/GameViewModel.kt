@@ -2,6 +2,7 @@ package com.alexpletnyov.counting_trainer.presentation
 
 import android.app.Application
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,8 +13,9 @@ import com.alexpletnyov.counting_trainer.domain.entity.Level
 import com.alexpletnyov.counting_trainer.domain.entity.Question
 import com.alexpletnyov.counting_trainer.domain.usecases.GenerateQuestionUseCase
 import com.alexpletnyov.counting_trainer.domain.usecases.GetGameSettingsUseCase
+import javax.inject.Inject
 
-class GameViewModel(
+class GameViewModel @Inject constructor(
 	private val getGameSettingsUseCase: GetGameSettingsUseCase,
 	private val generateQuestionUseCase: GenerateQuestionUseCase,
 	private val application: Application
